@@ -1,0 +1,39 @@
+---
+title: 'Coursera: Developing Data Products using RMarkdown and Leaflet'
+author: "Jayce Jocson"
+date: "August 07, 2023"
+output: 
+  html_document:
+    theme: journal
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+---
+# Overview 
+The goal of this course assignment from the Coursera is to create an interactive maps using the leaflet library and document it in the RMarkdown file. The final documentation will be hosted in RPubs.
+
+# Universities that can be found in Intramuros, Manila, Philippines
+This section provided the four popular Univeristies that are located in the Intramuros, Manila City, Philippines which is one of the famous tourist for historical spot which is also known as **"Walled City"**.
+
+It is known for its historical structure as it was built by the Spanish in the 16th century. It features well-preserved fortifications and colonial architecture, serving as a significant cultural and tourist destination.
+
+|**University**                  |**Description**                                                                               |
+|:------------------------------:|:--------------------------------------------------------------------------------------------:|
+|Mapua University                | Private University known for its engineering and technical programs.                         |
+|Lyceum of the Philippines       | Offering various programs from maritime, hotel, tourism management to law programs.          |
+|Colegio de San Juan de Letran   | Private Dominican institution with a rich history, offering business and liberal arts.       |
+|Pamantasan ng Lungsod ng Maynila| Public university providing quality education to the residents of Manila.                    |
+
+## Map of the Universities included in the table
+```{r load lib, echo=TRUE, message=FALSE}
+library(leaflet)
+library(dplyr)
+
+intramuros = data.frame(
+        lat = c(14.590373,14.5912, 14.593271, 14.58689),
+        lng=c(120.978111,120.977814, 120.976523, 120.97635),
+        labels=c("Mapua University", "Lyceum of the Philippines", "Colegio de San Juan de Letran", "Pamantasan ng Lungsod ng Maynila")
+)
+m = leaflet(intramuros) %>% setView(lng = 120.97699, lat = 14.58999, zoom = 16) %>% addTiles %>% addMarkers(popup=~labels)
+m
+```
